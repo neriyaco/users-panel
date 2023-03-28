@@ -1,0 +1,42 @@
+{
+    "sourceFile": "src/features/users/state.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 6,
+            "patches": [
+                {
+                    "date": 1679989593502,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1679989598596,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,11 +6,13 @@\n     initialState: [] as User[],\n     reducers: {\n         setUsers: (state, action) => {\n             state = action.payload;\n+            return state;\n         },\n         addUser: (state, action) => {\n             state.push(action.payload);\n+            return state;\n         },\n         updateUser: (state, action) => {\n             const { id, name, email, location } = action.payload;\n             const user = state.find((user) => user.id === id);\n@@ -21,8 +23,9 @@\n                     ...user.location,\n                     ...location\n                 }\n             }\n+            return state;\n         }\n     }\n });\n \n"
+                },
+                {
+                    "date": 1679989657783,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,8 +22,10 @@\n                 user.location = {\n                     ...user.location,\n                     ...location\n                 }\n+            } else {\n+                state.push(action.payload);\n             }\n             return state;\n         }\n     }\n"
+                },
+                {
+                    "date": 1679989843333,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n export const usersSlice = createSlice({\n     name: \"users\",\n     initialState: [] as User[],\n     reducers: {\n-        setUsers: (state, action) => {\n+        set: (state, action) => {\n             state = action.payload;\n             return state;\n         },\n         addUser: (state, action) => {\n@@ -30,6 +30,6 @@\n         }\n     }\n });\n \n-export const { setUsers, addUser, updateUser } = usersSlice.actions;\n+export const { set: setUsers, addUser, updateUser } = usersSlice.actions;\n export default usersSlice.reducer;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1679989851706,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,13 +8,13 @@\n         set: (state, action) => {\n             state = action.payload;\n             return state;\n         },\n-        addUser: (state, action) => {\n+        add: (state, action) => {\n             state.push(action.payload);\n             return state;\n         },\n-        updateUser: (state, action) => {\n+        update: (state, action) => {\n             const { id, name, email, location } = action.payload;\n             const user = state.find((user) => user.id === id);\n             if (user) {\n                 user.name = name;\n@@ -22,14 +22,12 @@\n                 user.location = {\n                     ...user.location,\n                     ...location\n                 }\n-            } else {\n-                state.push(action.payload);\n             }\n             return state;\n         }\n     }\n });\n \n-export const { set: setUsers, addUser, updateUser } = usersSlice.actions;\n+export const { set: setUsers, add: addUser, update: updateUser } = usersSlice.actions;\n export default usersSlice.reducer;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1679989984021,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,8 +24,11 @@\n                     ...location\n                 }\n             }\n             return state;\n+        },\n+        delete: (state, action) => {\n+            return state.filter((user) => user.id !== action.payload);\n         }\n     }\n });\n \n"
+                },
+                {
+                    "date": 1679990036378,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,6 +31,6 @@\n         }\n     }\n });\n \n-export const { set: setUsers, add: addUser, update: updateUser } = usersSlice.actions;\n+export const { set: setUsers, add: addUser, update: updateUser, delete: deleteUser } = usersSlice.actions;\n export default usersSlice.reducer;\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1679989593502,
+            "name": "Commit-0",
+            "content": "import { createSlice } from \"@reduxjs/toolkit\";\nimport { User } from \"@/types/user\";\n\nexport const usersSlice = createSlice({\n    name: \"users\",\n    initialState: [] as User[],\n    reducers: {\n        setUsers: (state, action) => {\n            state = action.payload;\n        },\n        addUser: (state, action) => {\n            state.push(action.payload);\n        },\n        updateUser: (state, action) => {\n            const { id, name, email, location } = action.payload;\n            const user = state.find((user) => user.id === id);\n            if (user) {\n                user.name = name;\n                user.email = email;\n                user.location = {\n                    ...user.location,\n                    ...location\n                }\n            }\n        }\n    }\n});\n\nexport const { setUsers, addUser, updateUser } = usersSlice.actions;\nexport default usersSlice.reducer;"
+        }
+    ]
+}

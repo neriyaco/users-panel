@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/tools/nop.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1679991039889,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1679991039889,
+            "name": "Commit-0",
+            "content": "export const nop = () => {};\n"
+        }
+    ]
+}
